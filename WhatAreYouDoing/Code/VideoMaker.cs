@@ -8,7 +8,7 @@ namespace WhatAreYouDoing.Code
         public void MakeVideo()
         {
             var ffmpeg = new FFMpegConverter();
-            ffmpeg.Invoke("-f image2 -r 1/5 -i %08d.jpg -vcodec libx264 out.mp4");
+            ffmpeg.Invoke("-f image2 -r 1/5 -i %08d.jpg -vcodec libx264 "+ DateTime.Today + ".mp4");
 
         }
     }
