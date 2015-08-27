@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="What are you doing?" Height="85.845" Width="204.111" Background="Gray" ResizeMode="CanMinimize">
     <Grid>
-        <ToggleButton Margin="3,10,102,16" Name="startCapStopCap" Checked="startCapStopCap_Checked" Unchecked="startCapStopCap_Unchecked">
+        <ToggleButton Margin="3,10,102,16" Name="startCapStopCap" Checked="startCapStopCap_Checked" Unchecked="ToggleButton_OnUnchecked">
             <ToggleButton.Style>
                 <Style TargetType="{x:Type ToggleButton}">
                     <Setter Property="Content" Value="Start capture"/>
