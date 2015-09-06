@@ -1,15 +1,42 @@
 ﻿using System;
-using NReco.VideoConverter;
+using System.Drawing;
+using System.Threading;
+using System.Windows.Forms;
+using AForge.Video.FFMPEG;
 
 namespace WhatAreYouDoing.Code
 {
-    internal class VideoMaker
+    class VideoMaker
     {
-        public void MakeVideo()
-        {
-            var ffmpeg = new FFMpegConverter();
-            ffmpeg.Invoke("-f image2 -r 1/5 -i %08d.jpg -vcodec libx264 "+ DateTime.Today + ".mp4");
+        private VideoFileWriter _writer = new VideoFileWriter();
+        private int _height = Screen.PrimaryScreen.Bounds.Height;
+        private int _width = Screen.PrimaryScreen.Bounds.Width;
 
+        public void InitializeThread()
+        {
+            //Thread thread = new Thread(InitializeWriter);
+            // thread.Start();
+        }
+
+        public void InitializeWriter()
+        {
+            _writer.Open(DateTime.Today.ToString()+".mp4", _width, _height, 10, VideoCodec.MPEG4);
+        }
+
+        public void WriteFrame(Bitmap img)
+        {
+            _writer.WriteVideoFrame(img);
+        }
+
+        public void StopWriter()
+        {
+            _writer.Close();
+            Dispose();
+        }
+
+        private void Dispose()
+        {
+            _writer.Dispose();
         }
     }
 }
