@@ -8,16 +8,16 @@ using System.Windows.Forms;
 
 namespace WhatAreYouDoing.Code
 {
-    class Screenshoter
+    public class Screenshoter
     {
-
-        public static Bitmap TakeScreenshot(Screen currentScreen)
+        public Bitmap TakeScreenshot(Screen currentScreen)
         {
             Graphics graph = null;
             var bmpScreenshot = new Bitmap(currentScreen.Bounds.Width, currentScreen.Bounds.Height, PixelFormat.Format32bppArgb);
             graph = Graphics.FromImage(bmpScreenshot);
             graph.CopyFromScreen(currentScreen.Bounds.X, currentScreen.Bounds.Y, 0,0,currentScreen.Bounds.Size, CopyPixelOperation.SourceCopy);
             return bmpScreenshot;
+
         }
     }
 }

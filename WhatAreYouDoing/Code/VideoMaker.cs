@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -6,37 +8,35 @@ using AForge.Video.FFMPEG;
 
 namespace WhatAreYouDoing.Code
 {
-    class VideoMaker
+    public class VideoMaker
     {
-        private VideoFileWriter _writer = new VideoFileWriter();
-        private int _height = Screen.PrimaryScreen.Bounds.Height;
-        private int _width = Screen.PrimaryScreen.Bounds.Width;
+        public VideoFileWriter Writer { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        
 
-        public void InitializeThread()
+        public VideoMaker()
         {
-            //Thread thread = new Thread(InitializeWriter);
-            // thread.Start();
+            Width = Screen.PrimaryScreen.Bounds.Width;
+            Height = Screen.PrimaryScreen.Bounds.Height;
+            Writer = new VideoFileWriter();
+
         }
 
-        public void InitializeWriter()
+        public void OpenVideo()
         {
-            _writer.Open(DateTime.Today.ToString()+".mp4", _width, _height, 10, VideoCodec.MPEG4);
+            Writer.Open(DateTime.Today.ToShortDateString() + ".avi", 1920, 1080, 1, VideoCodec.MPEG4);
+            bool x = Writer.IsOpen;
         }
 
-        public void WriteFrame(Bitmap img)
+        public void AddFrame(Bitmap img)
         {
-            _writer.WriteVideoFrame(img);
+            Writer.WriteVideoFrame(img);
         }
 
-        public void StopWriter()
+        public void Stop()
         {
-            _writer.Close();
-            Dispose();
-        }
-
-        private void Dispose()
-        {
-            _writer.Dispose();
+            Writer.Close();
         }
     }
 }
