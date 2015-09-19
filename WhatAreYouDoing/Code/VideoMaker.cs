@@ -19,24 +19,27 @@ namespace WhatAreYouDoing.Code
         {
             Width = Screen.PrimaryScreen.Bounds.Width;
             Height = Screen.PrimaryScreen.Bounds.Height;
-            Writer = new VideoFileWriter();
-
+            
         }
 
         public void OpenVideo()
         {
+            Writer = new VideoFileWriter();
             Writer.Open(DateTime.Today.ToShortDateString() + ".avi", 1920, 1080, 1, VideoCodec.MPEG4);
-            bool x = Writer.IsOpen;
         }
 
         public void AddFrame(Bitmap img)
         {
-            Writer.WriteVideoFrame(img);
+            using (img)
+            {
+                Writer.WriteVideoFrame(img);
+            }
         }
 
         public void Stop()
         {
             Writer.Close();
+            Writer.Dispose();
         }
     }
 }

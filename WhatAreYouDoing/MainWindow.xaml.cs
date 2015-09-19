@@ -43,6 +43,7 @@ namespace WhatAreYouDoing
         private void startCapStopCap_Unchecked(object sender, RoutedEventArgs e)
         {
            Video.Stop();
+           Timer.Stop(); 
         }
     }
 }
